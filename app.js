@@ -12,6 +12,7 @@ app.get('/health', (req, res) => {
   const payload = {
     status: 'ok',
     uptime: process.uptime(),
+    uptime_seconds: Math.floor(process.uptime()),
   };
 
   const end = process.hrtime.bigint();
