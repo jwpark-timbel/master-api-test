@@ -53,4 +53,16 @@ describe('GET /health', () => {
       expect(res.body.response_time_ms).toBeGreaterThanOrEqual(0);
     }
   });
+
+  it('uptime_seconds 필드가 존재해야 한다', async () => {
+    const res = await request(app).get('/health');
+    expect(res.body).toHaveProperty('uptime_seconds');
+  });
+
+  it('uptime_seconds는 0 이상의 정수여야 한다', async () => {
+    const res = await request(app).get('/health');
+    expect(typeof res.body.uptime_seconds).toBe('number');
+    expect(Number.isInteger(res.body.uptime_seconds)).toBe(true);
+    expect(res.body.uptime_seconds).toBeGreaterThanOrEqual(0);
+  });
 });
